@@ -9,3 +9,6 @@ python train.py -data data/demo -save_model demo-model
 
 #Generating translations
 python translate.py -model demo-model_XYZ.pt -src data/src-test.txt -output pred.txt -replace_unk -verbose
+
+#Evaluating scores
+python calculatebleu.py "pred.txt" "tgt-test.txt"
