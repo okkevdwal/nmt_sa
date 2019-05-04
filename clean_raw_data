@@ -1,0 +1,38 @@
+#!/usr/bin/perl
+use strict;
+use utf8;
+use open ':utf8';
+
+my $lang = "st";#incase you want to use the same file for multiple languages
+
+#open English files
+open(INen, "<File.en.txt");
+open(OUTen, ">CleanedFile.en.txt");
+
+#Open other language files as indicated by the lang variable
+open(INother, "<File.$lang.txt");
+open(OUTother, ">CleanedFile.$lang.txt");
+
+while(my $en = <INen>)#for each English line you read in
+{
+    my $ot = <INother>;#read in the matching translation line
+
+    chomp ($en, $ot);
+
+    #simple regex to check if either language has the | symbol you mention in the email
+    if(($en =~ /\|/) && ($ot =~ /\|/))
+    {
+	#if they have the symbol you will add the processing to convert it as you choose here
+
+	#and then print the modified version out (or not at all / or to a seperate file to see what your modification does / or not at all)
+        print OUTen "$en\n";
+        print OUTother "$ot\n";
+    }
+    else
+    {#this is where you print out all the other lines to make sure everything stays aligned 
+        print OUTen "$en\n";
+        print OUTother "$ot\n";
+    }
+}
+
+close();
